@@ -26,33 +26,56 @@ public class DragObject : MonoBehaviour
     {
         switch(touching){
             case 0:
-                drawingBar -= 0.5f;
-                violinBar -= 0.5f;
-                prayerBar -= 0.5f;
+                drawingBar -= 0.1f;
+                violinBar -= 0.1f;
+                prayerBar -= 0.1f;
                 break;
 
+            //touching drawing
             case 1:
-                drawingBar += 0.5f;
-                violinBar -= 0.5f;
-                prayerBar -= 0.5f;
+                if(drawingBar <= 100){
+                    drawingBar += 0.3f;
+                }
+                
+                violinBar -= 0.1f;
+                prayerBar -= 0.1f;
                 break;
 
+            //touching violin
             case 2:
-                drawingBar -= 0.5f;
-                violinBar += 0.5f;
-                prayerBar -= 0.5f;
+            if(violinBar <= 100){
+                violinBar += 0.3f;
+            }
+                drawingBar -= 0.1f;
+                prayerBar -= 0.1f;
                 break;
 
+            //touching prayer
             case 3:
-                drawingBar -= 0.5f;
-                violinBar -= 0.5f;
-                prayerBar += 0.5f;
+            if(prayerBar <= 100){
+                prayerBar += 0.3f;
+            }
+                drawingBar -= 0.1f;
+                violinBar -= 0.1f;
                 break;
         }
     }
 
-    void OnCollision(){
-        
+    void OnCollisionEnter(Collision platform){
+        switch(platform.gameObject.name){
+            case "Drawing":
+            Debug.Log("drawing");
+            touching = 1;
+                break;
+            case "Violin":
+            Debug.Log("Violin");
+            touching = 2;
+                break;
+            case "Prayer":
+            Debug.Log("Prayer");
+            touching = 3;
+                break;
+        }
     }
     void OnMouseDown(){
         mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
