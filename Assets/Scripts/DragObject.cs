@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DragObject : MonoBehaviour
 {
+    public Material inactiveMaterial;
     private Vector3 mOffset;
 
     private float mZCoord;
@@ -13,9 +14,15 @@ public class DragObject : MonoBehaviour
     public float drawingBar = 100f, violinBar = 100f, prayerBar = 100f;
 
     public int touching = 0;
+
+    [SerializeField]
+    public bool canDrag = true; 
+
+    Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
+        rend = GetComponentInChildren<Renderer>();
         mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         
         mOffset = gameObject.transform.position - GetMouseWorldPos();
@@ -59,6 +66,11 @@ public class DragObject : MonoBehaviour
                 violinBar -= 0.1f;
                 break;
         }
+
+        if(prayerBar <= 0 || violinBar <= 0 || drawingBar<=0){
+            canDrag = false;   
+            rend.material = inactiveMaterial; 
+        }
     }
 
     void OnCollisionEnter(Collision platform){
@@ -82,7 +94,9 @@ public class DragObject : MonoBehaviour
         mOffset = gameObject.transform.position - GetMouseWorldPos();
     }
     void OnMouseDrag(){
-        transform.position = GetMouseWorldPos() + mOffset;
+        if(canDrag){
+            transform.position = GetMouseWorldPos() + mOffset;
+        }
     }
 
     private Vector3 GetMouseWorldPos(){

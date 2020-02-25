@@ -17,17 +17,17 @@ public class ClampName : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 namePos = Camera.main.WorldToScreenPoint(this.transform.position);
-        musicLabel.transform.position = namePos + new Vector3(0, 60f, 0f);
-        drawingLabel.transform.position = namePos + new Vector3(0, 40f, 0f);
-        prayerLabel.transform.position = namePos + new Vector3(0, 20f, 0f);
+            Vector3 namePos = Camera.main.WorldToScreenPoint(this.transform.position);
+            musicLabel.transform.position = namePos + new Vector3(0, 60f, 0f);
+            drawingLabel.transform.position = namePos + new Vector3(0, 40f, 0f);
+            prayerLabel.transform.position = namePos + new Vector3(0, 20f, 0f);
 
-        drawingSlider.transform.position = namePos + new Vector3(70f, 50f, 0f);
-        musicSlider.transform.position = namePos + new Vector3(70f, 70f, 0f);
-        prayerSlider.transform.position = namePos + new Vector3(70f, 30f, 0f);
+            drawingSlider.transform.position = namePos + new Vector3(70f, 50f, 0f);
+            musicSlider.transform.position = namePos + new Vector3(70f, 70f, 0f);
+            prayerSlider.transform.position = namePos + new Vector3(70f, 30f, 0f);
 
-        drawingSlider.value = dragobject.drawingBar/100;
-        musicSlider.value = dragobject.violinBar/100;
-        prayerSlider.value = dragobject.prayerBar/100;
+            drawingSlider.value = dragobject.drawingBar/100;
+            musicSlider.value = dragobject.violinBar/100;
+            prayerSlider.value = dragobject.prayerBar/100;
     }
 }
