@@ -23,6 +23,7 @@ public class DragObject : MonoBehaviour
     void Start()
     {
         rend = GetComponentInChildren<Renderer>();
+
         mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         
         mOffset = gameObject.transform.position - GetMouseWorldPos();
@@ -71,6 +72,7 @@ public class DragObject : MonoBehaviour
             canDrag = false;   
             rend.material = inactiveMaterial; 
         }
+
     }
 
     void OnCollisionEnter(Collision platform){
@@ -87,6 +89,9 @@ public class DragObject : MonoBehaviour
             Debug.Log("Prayer");
             touching = 3;
                 break;
+            case "Bounds":
+                Destroy(gameObject);
+            break;
         }
     }
     void OnMouseDown(){
